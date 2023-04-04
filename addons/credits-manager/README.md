@@ -53,4 +53,4 @@ This last step is importante, because `file.sqlitedb` can be used between projec
 * Create a  credits scene by clicking the *"Export as **tscn**"* button and selecting the desired format
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under licence CC0 1.0 Universal. See the LICENSE file for details.
