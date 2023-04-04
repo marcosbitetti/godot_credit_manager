@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6hwhlc18qoys"]
+
+[ext_resource type="Script" path="res://test/credits.gd" id="1_npfcf"]
+
+[node name="credits" type="VBoxContainer"]
+custom_minimum_size = Vector2(800, 200)
+script = ExtResource("1_npfcf")
+
+[node name="lbl_Project" type="Label" parent="."]
+layout_mode = 2
+text = "Project"
+
+[node name="Project" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b][url=http://www.wildwitchproject.com.br/]Wild Witch Project[/url][/b] by Marcos Augusto Bitetti (marcosbitetti@gmail.com),  licensed under [b][url=https://creativecommons.org/licenses/by-nd/4.0/]Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)[/url][/b]
+
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="lbl_3D Model" type="Label" parent="."]
+layout_mode = 2
+text = "3D Model"
+
+[node name="3D Model" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b][url=https://github.com/GDQuest/godot-3d-mannequin]Open 3D Mannequin[/url][/b] by GDQuest,  licensed under [b][url=https://opensource.org/license/mit/]MIT[/url][/b]
+
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://drrsa41d0vjxr"]
+
+[ext_resource type="Script" path="res://addons/credits-manager/credits_generator.gd" id="1_ynuw6"]
+
+[node name="credits_generator" type="Window"]
+size = Vector2i(300, 250)
+script = ExtResource("1_ynuw6")
+
+[node name="CheckButton" type="CheckButton" parent="."]
+offset_right = 44.0
+offset_bottom = 24.0
+button_pressed = true
+text = "Links clickable"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 200.0
+offset_top = 200.0
+offset_right = 280.0
+offset_bottom = 231.0
+text = "Generate"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="Button" to="." method="_on_generate_pressed"]

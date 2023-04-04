@@ -1,0 +1,180 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4thmsactmje2"]
+
+[ext_resource type="Script" path="res://addons/credits-manager/credit_edit_popup.gd" id="1_7v0ld"]
+
+[node name="CreditEdit" type="Window"]
+title = "Edit Credit"
+size = Vector2i(350, 290)
+exclusive = true
+min_size = Vector2i(250, 250)
+script = ExtResource("1_7v0ld")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(350, 290)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="a" type="VBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(348, 0)
+layout_mode = 0
+offset_right = 118.0
+offset_bottom = 40.0
+
+[node name="name" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/name"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Name
+"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/a/name"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="link" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/link"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Link"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/a/link"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="file" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/file"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "File"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/a/file"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Panel/a/file"]
+layout_mode = 2
+text = "Pick"
+
+[node name="author" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/author"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Author"
+
+[node name="LineEdit" type="LineEdit" parent="Panel/a/author"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="type" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/type"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Type"
+
+[node name="MenuButton" type="MenuButton" parent="Panel/a/type"]
+layout_mode = 2
+size_flags_horizontal = 3
+flat = false
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="licence" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Panel/a/licence"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+text = "Licence"
+
+[node name="MenuButton" type="MenuButton" parent="Panel/a/licence"]
+layout_mode = 2
+size_flags_horizontal = 3
+flat = false
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="other" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="Panel/a/other"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Panel/a/other"]
+layout_mode = 2
+text = "Edit Types"
+
+[node name="Panel" type="Panel" parent="Panel/a/other"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Panel/a/other"]
+layout_mode = 2
+text = "Edit Licences"
+
+[node name="Panel3" type="Panel" parent="Panel/a/other"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="Panel/a"]
+layout_mode = 2
+
+[node name="events" type="HBoxContainer" parent="Panel/a"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel2" type="Panel" parent="Panel/a/events"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="Panel/a/events"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Panel" type="Panel" parent="Panel/a/events"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="Panel/a/events"]
+layout_mode = 2
+text = "Save"
+
+[node name="Panel3" type="Panel" parent="Panel/a/events"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="text_changed" from="Panel/a/name/LineEdit" to="." method="_on_name_text_changed"]
+[connection signal="text_changed" from="Panel/a/link/LineEdit" to="." method="_on_link_text_changed"]
+[connection signal="text_changed" from="Panel/a/file/LineEdit" to="." method="_on_file_text_changed"]
+[connection signal="pressed" from="Panel/a/file/Button" to="." method="_on_pick_pressed"]
+[connection signal="text_changed" from="Panel/a/author/LineEdit" to="." method="_on_author_text_changed"]
+[connection signal="about_to_popup" from="Panel/a/type/MenuButton" to="." method="_on_type_about_to_popup"]
+[connection signal="about_to_popup" from="Panel/a/licence/MenuButton" to="." method="_on_licence_about_to_popup"]
+[connection signal="pressed" from="Panel/a/events/Button" to="." method="_on_close_requested"]
+[connection signal="pressed" from="Panel/a/events/Button2" to="." method="_on_button_save_pressed"]

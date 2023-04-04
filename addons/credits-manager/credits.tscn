@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0417h24hwepw"]
+
+[ext_resource type="Script" path="res://addons/credits-manager/Credits.gd" id="1_d0asg"]
+
+[node name="Credits" type="VBoxContainer"]
+custom_minimum_size = Vector2(300, 200)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_d0asg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Add"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Export:"
+
+[node name="Button" type="Button" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "TSCN"
+
+[node name="Button2" type="Button" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "JSON"
+
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="list" type="VBoxContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/Button" to="." method="_on_export_tscene_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/Button2" to="." method="_on_export_json_pressed"]
