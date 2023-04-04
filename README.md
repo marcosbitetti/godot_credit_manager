@@ -7,6 +7,8 @@ Credits Manager is a tool designed to manage credits references about any projec
 
 This tool enables you to easily track and acknowledge the contributions of team members, volunteers, or any external resources that have helped your project.
 
+![Credits Manager in Godot Editor](readme/plugin-demo.jpg)
+
 ## Features
 * Add, edit and delete credit references for your project resources
 * Filter credits by resource type
