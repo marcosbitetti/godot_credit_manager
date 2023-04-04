@@ -22,4 +22,4 @@ Nothing is requerid, even you try to change this tool
 If you need a different environment (such i386) remove comments on `Makefile`
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under licence CC0 1.0 Universal. See the LICENSE file for details.
