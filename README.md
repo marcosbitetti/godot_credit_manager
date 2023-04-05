@@ -10,6 +10,7 @@ This tool enables you to easily track and acknowledge the contributions of team 
 ![Credits Manager in Godot Editor](readme/plugin-demo.jpg)
 
 ## Features
+* Share credit information under projects
 * Add, edit and delete credit references for your project resources
 * Filter credits by resource type
 * Export credits data to **JSON** formats
