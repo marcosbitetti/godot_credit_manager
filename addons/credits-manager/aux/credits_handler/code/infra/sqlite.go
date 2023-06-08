@@ -115,10 +115,10 @@ func createBaseTable(ctx context.Context) error {
 			_id 		INTEGER PRIMARY KEY NOT NULL,
 			name		TEXT,
 			filename	TEXT,
-			type_id		INTEGER,
+			type_id		INTEGER NOT NULL DEFAULT 1,
 			author 		TEXT,
 			link 		TEXT,
-			licence_id 	INTEGER,
+			licence_id 	INTEGER NOT NULL DEFAULT 1,
 			FOREIGN KEY (type_id)
 				REFERENCES types (_id)
 					ON DELETE CASCADE
@@ -142,6 +142,9 @@ func dumpFirstTypes() {
 	AddType("Project")
 	AddType("Sound Effect")
 	AddType("Texture")
+	AddType("Shader")
+	AddType("Photo")
+	AddType("Dubbing/Narration")
 }
 
 func dumpFirstLicences() {
@@ -174,6 +177,7 @@ func ListCredits() []model.Credit {
 		FROM credits c
 		LEFT JOIN types t ON t._id == c.type_id
 		LEFT JOIN licences l ON l._id == c.licence_id
+		ORDER BY c.name  COLLATE NOCASE ASC
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from credits", err)

@@ -19,3 +19,6 @@ data_*/
 # Go workspace file
 go.work
 
+# extras
+.idea
+.idea/*
