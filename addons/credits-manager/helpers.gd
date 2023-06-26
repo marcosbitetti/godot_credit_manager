@@ -18,7 +18,7 @@ static func get_from_api(args : Array[String]) -> Array:
 
 static func format_bb_code(credit : Dictionary) -> String:
 	return '[b][url=' + credit.link + ']' + credit.name + '[/url][/b]' +\
-		' by ' + credit.author + ',  licensed under ' +\
+		' by [b]' + credit.author + '[/b],  licensed under ' +\
 		'[b][url=' + credit.licenceUrl + ']' + credit.licence + '[/url][/b]'
 
 static func map_resources() -> Array:

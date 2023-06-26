@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -167,9 +168,9 @@ func dumpFirstLicences() {
 	AddLicence("Mozilla Public License 2.0", "https://www.mozilla.org/en-US/MPL/2.0/")
 }
 
-func ListCredits() []model.Credit {
+func ListCredits(ascDesc string, search string) []model.Credit {
 	list := make([]model.Credit, 0)
-	rows, err := db.Query(`
+	rows, err := db.Query(fmt.Sprintf(`
 		SELECT c._id, c.name, filename, author, c.link,
 			t.name as type,
 			l.name as licence,
@@ -177,8 +178,9 @@ func ListCredits() []model.Credit {
 		FROM credits c
 		LEFT JOIN types t ON t._id == c.type_id
 		LEFT JOIN licences l ON l._id == c.licence_id
-		ORDER BY c.name  COLLATE NOCASE ASC
-	`)
+		%s
+		ORDER BY c.name  COLLATE NOCASE %s
+	`, mountQuery(search), ascDesc))
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from credits", err)
 	}
@@ -400,4 +402,13 @@ func DeleteLicence(name string) error {
 	}()
 	_, err = stmt.Exec(name)
 	return err
+}
+
+func mountQuery(q string) string {
+	if q == "" {
+		return ""
+	}
+	tokens := strings.Fields(q)
+	joined := "%" + strings.Join(tokens, "%") + "%"
+	return fmt.Sprintf("WHERE c.name LIKE '%s' OR c.author LIKE '%s'", joined, joined)
 }

@@ -11,7 +11,10 @@ func update_credits():
 		var n = $scroll/list.get_child(0)
 		$scroll/list.remove_child(n)
 		n.queue_free()
-	for c in Helpers.get_from_api(["list", "asc"]):
+	var command = "asc"
+	if  $HBoxContainerFilter/HBoxContainer/search_text.text.strip_edges().length() > 0:
+		command += " " + $HBoxContainerFilter/HBoxContainer/search_text.text.strip_edges()
+	for c in Helpers.get_from_api(["list", command]):
 		var item = CreditItem.instantiate()
 		item.parse(c)
 		item.container(self)
@@ -42,3 +45,13 @@ func _on_export_tscene_pressed():
 	var c = CreditGenerator.instantiate()
 	get_tree().root.add_child(c)
 	c.popup_centered(c.size)
+
+
+func _on_clear_search_pressed():
+	$HBoxContainerFilter/HBoxContainer/search_text.text = ""
+	$HBoxContainerFilter/HBoxContainer/search_text.grab_focus()
+	call_deferred("update_credits")
+
+
+func _on_search_text_text_changed(new_text):
+	call_deferred("update_credits")

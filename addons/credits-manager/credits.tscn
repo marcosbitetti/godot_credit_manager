@@ -1,12 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0417h24hwepw"]
+[gd_scene load_steps=4 format=3 uid="uid://d0417h24hwepw"]
 
 [ext_resource type="Script" path="res://addons/credits-manager/Credits.gd" id="1_d0asg"]
+[ext_resource type="Texture2D" uid="uid://cfaofiixgyc75" path="res://addons/credits-manager/Search.svg" id="2_ars3j"]
+[ext_resource type="Texture2D" uid="uid://b4a6b7n4sd5ir" path="res://addons/credits-manager/Clear.svg" id="3_pvnsj"]
 
 [node name="Credits" type="VBoxContainer"]
 custom_minimum_size = Vector2(300, 200)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_d0asg")
+
+[node name="HBoxContainerFilter" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainerFilter"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainerFilter/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("2_ars3j")
+flat = true
+
+[node name="search_text" type="LineEdit" parent="HBoxContainerFilter/HBoxContainer"]
+custom_minimum_size = Vector2(186, 0)
+layout_mode = 2
+
+[node name="clear_search" type="Button" parent="HBoxContainerFilter/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_pvnsj")
+flat = true
+
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="list" type="VBoxContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -32,14 +64,8 @@ text = "TSCN"
 layout_mode = 2
 text = "JSON"
 
-[node name="scroll" type="ScrollContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="list" type="VBoxContainer" parent="scroll"]
-layout_mode = 2
-size_flags_horizontal = 3
-
+[connection signal="text_changed" from="HBoxContainerFilter/HBoxContainer/search_text" to="." method="_on_search_text_text_changed"]
+[connection signal="pressed" from="HBoxContainerFilter/HBoxContainer/clear_search" to="." method="_on_clear_search_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="HBoxContainer/HBoxContainer/Button" to="." method="_on_export_tscene_pressed"]
 [connection signal="pressed" from="HBoxContainer/HBoxContainer/Button2" to="." method="_on_export_json_pressed"]

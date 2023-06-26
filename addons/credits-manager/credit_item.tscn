@@ -11,6 +11,10 @@ script = ExtResource("1_8v37c")
 [node name="text" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 11
+theme_override_font_sizes/bold_font_size = 15
+theme_override_font_sizes/italics_font_size = 11
+theme_override_font_sizes/bold_italics_font_size = 15
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
