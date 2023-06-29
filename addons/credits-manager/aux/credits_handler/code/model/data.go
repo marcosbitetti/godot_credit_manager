@@ -1,12 +1,12 @@
 package model
 
 type Type struct {
-	Id   int64
+	Id   int64  `json:"_id"`
 	Name string `json:"name"`
 }
 
 type Licence struct {
-	Id   int64
+	Id   int64  `json:"_id"`
 	Name string `json:"name"`
 	Link string `json:"link"`
 }

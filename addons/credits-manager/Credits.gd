@@ -5,6 +5,7 @@ const Helpers = preload("res://addons/credits-manager/helpers.gd")
 const CreditItem : PackedScene = preload("res://addons/credits-manager/credit_item.tscn")
 const CreditEdit : PackedScene = preload("res://addons/credits-manager/credit_edit.tscn")
 const CreditGenerator : PackedScene = preload("res://addons/credits-manager/credits_generator.tscn")
+const LicenceManager : PackedScene = preload("res://addons/credits-manager/licence_manager.tscn")
 
 func update_credits():
 	while $scroll/list.get_child_count():
@@ -55,3 +56,9 @@ func _on_clear_search_pressed():
 
 func _on_search_text_text_changed(new_text):
 	call_deferred("update_credits")
+
+
+func _on_manage_licences_pressed():
+	var lm = LicenceManager.instantiate()
+	get_tree().root.add_child(lm)
+	lm.popup_centered(lm.size)

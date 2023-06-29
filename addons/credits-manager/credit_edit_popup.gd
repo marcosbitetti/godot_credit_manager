@@ -81,6 +81,7 @@ func _on_pick_pressed():
 	fd.file_mode = EditorFileDialog.FILE_MODE_OPEN_ANY
 	fd.connect("file_selected", file_selected)
 	fd.connect("dir_selected", file_selected)
+	fd.size = Vector2(600,400)
 	get_tree().root.add_child(fd)
 	fd.popup_centered()
 

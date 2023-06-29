@@ -47,10 +47,20 @@ layout_mode = 2
 layout_mode = 2
 text = "Add"
 
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="manage_licences" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Licences"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -67,5 +77,6 @@ text = "JSON"
 [connection signal="text_changed" from="HBoxContainerFilter/HBoxContainer/search_text" to="." method="_on_search_text_text_changed"]
 [connection signal="pressed" from="HBoxContainerFilter/HBoxContainer/clear_search" to="." method="_on_clear_search_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="HBoxContainer/manage_licences" to="." method="_on_manage_licences_pressed"]
 [connection signal="pressed" from="HBoxContainer/HBoxContainer/Button" to="." method="_on_export_tscene_pressed"]
 [connection signal="pressed" from="HBoxContainer/HBoxContainer/Button2" to="." method="_on_export_json_pressed"]
