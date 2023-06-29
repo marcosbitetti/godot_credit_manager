@@ -261,7 +261,7 @@ func DeleteCredit(id int64) error {
 func ListTypes() []model.Type {
 	list := make([]model.Type, 0)
 	rows, err := db.Query(`
-		SELECT name FROM types ORDER BY name ASC
+		SELECT _id, name FROM types ORDER BY name ASC
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from typess", err)
@@ -273,7 +273,7 @@ func ListTypes() []model.Type {
 	}()
 	for rows.Next() {
 		data := model.Type{}
-		if err := rows.Scan(&data.Name); err != nil {
+		if err := rows.Scan(&data.Id, &data.Name); err != nil {
 			local.HandleErrorMessage("cant read row from types", err)
 		}
 		list = append(list, data)
@@ -334,7 +334,7 @@ func DeleteType(name string) error {
 func ListLicences() []model.Licence {
 	list := make([]model.Licence, 0)
 	rows, err := db.Query(`
-		SELECT name, link FROM licences ORDER BY name ASC
+		SELECT _id, name, link FROM licences ORDER BY name ASC
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from licences", err)
@@ -346,7 +346,7 @@ func ListLicences() []model.Licence {
 	}()
 	for rows.Next() {
 		data := model.Licence{}
-		if err := rows.Scan(&data.Name, &data.Link); err != nil {
+		if err := rows.Scan(&data.Id, &data.Name, &data.Link); err != nil {
 			local.HandleErrorMessage("cant read row from licences", err)
 		}
 		list = append(list, data)
