@@ -299,9 +299,9 @@ func AddType(name string) error {
 	return err
 }
 
-func UpdateType(name string, oldName string) error {
+func UpdateType(id int64, name string) error {
 	stmt, err := db.Prepare(`
-		UPDATE types SET name=? WHERE _id=(SELECT _id FROM types WHERE name=?)
+		UPDATE types SET name=? WHERE _id=?
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant prepare to update type", err)
@@ -313,7 +313,7 @@ func UpdateType(name string, oldName string) error {
 		}
 	}()
 
-	_, err = stmt.Exec(name, oldName)
+	_, err = stmt.Exec(name, id)
 	return err
 }
 
@@ -372,9 +372,9 @@ func AddLicence(name string, link string) error {
 	return err
 }
 
-func UpdateLicence(name string, link string, oldName string) error {
+func UpdateLicence(id int64, name string, link string) error {
 	stmt, err := db.Prepare(`
-		UPDATE licences SET name=?, link=? WHERE _id=(SELECT _id FROM licences WHERE name=?);
+		UPDATE licences SET name=?, link=? WHERE _id=?;
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant prepare to update licence", err)
@@ -386,7 +386,7 @@ func UpdateLicence(name string, link string, oldName string) error {
 		}
 	}()
 
-	_, err = stmt.Exec(name, link, oldName)
+	_, err = stmt.Exec(name, link, id)
 	return err
 }
 

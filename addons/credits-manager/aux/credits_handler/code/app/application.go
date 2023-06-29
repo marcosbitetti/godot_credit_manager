@@ -8,12 +8,18 @@ import (
 )
 
 var commandList map[string]func(query string) string = map[string]func(query string) string{
-	"list":     commands.List,
-	"add":      commands.AddOrUpdate,
-	"update":   commands.AddOrUpdate,
-	"delete":   commands.Delete,
-	"types":    commands.ListTypes,
-	"licences": commands.ListLicences,
+	"list":   commands.List,
+	"add":    commands.AddOrUpdate,
+	"update": commands.AddOrUpdate,
+	"delete": commands.Delete,
+
+	"licences":       commands.ListLicences,
+	"add-licence":    commands.AddOrUpdateLicence,
+	"update-licence": commands.AddOrUpdateLicence,
+
+	"types":       commands.ListTypes,
+	"add-type":    commands.AddOrUpdateType,
+	"update-type": commands.AddOrUpdateType,
 }
 
 func Start(com []string) {
