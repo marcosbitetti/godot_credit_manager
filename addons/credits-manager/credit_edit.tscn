@@ -4,6 +4,7 @@
 
 [node name="CreditEdit" type="Window"]
 title = "Edit Credit"
+position = Vector2i(0, 36)
 size = Vector2i(350, 290)
 exclusive = true
 min_size = Vector2i(250, 250)

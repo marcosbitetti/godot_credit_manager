@@ -3,7 +3,7 @@ extends Object
 
 static func get_from_api(args : Array[String]) -> Array:
 	var path : String = ProjectSettings.globalize_path("res://")
-	path += "addons/credits-manager/aux/credits_handler/bin/credits-manager-amd64-linux"
+	path += "addons/credits-manager/aux/credits_handler/bin/" + check_os()
 	var out : Array[String] = []
 	var code : int = OS.execute(path, args, out, true )
 	if code != 0:
@@ -48,3 +48,15 @@ static func files_resources(path : String = "", list : Array = []) -> Array:
 			file_name = dir.get_next()
 	return list
 	
+static func check_os() -> String:
+	var run = ""
+	match OS.get_name():
+		"Windows", "UWP":
+			run = "credits-manager-amd64.exe"
+		"macOS":
+			run = "credits-manager-amd64-darwin"
+		"Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD":
+			run = "credits-manager-amd64-linux"
+	return run
+
+

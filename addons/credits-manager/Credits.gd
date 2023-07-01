@@ -6,6 +6,7 @@ const CreditItem : PackedScene = preload("res://addons/credits-manager/credit_it
 const CreditEdit : PackedScene = preload("res://addons/credits-manager/credit_edit.tscn")
 const CreditGenerator : PackedScene = preload("res://addons/credits-manager/credits_generator.tscn")
 const LicenceManager : PackedScene = preload("res://addons/credits-manager/licence_manager.tscn")
+const TypesManager : PackedScene = preload("res://addons/credits-manager/types_manager.tscn")
 
 func update_credits():
 	while $scroll/list.get_child_count():
@@ -62,3 +63,9 @@ func _on_manage_licences_pressed():
 	var lm = LicenceManager.instantiate()
 	get_tree().root.add_child(lm)
 	lm.popup_centered(lm.size)
+
+
+func _on_manage_types_pressed():
+	var tm = TypesManager.instantiate()
+	get_tree().root.add_child(tm)
+	tm.popup_centered(tm.size)

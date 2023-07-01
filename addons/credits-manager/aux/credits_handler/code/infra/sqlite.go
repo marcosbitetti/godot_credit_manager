@@ -261,7 +261,7 @@ func DeleteCredit(id int64) error {
 func ListTypes() []model.Type {
 	list := make([]model.Type, 0)
 	rows, err := db.Query(`
-		SELECT _id, name FROM types ORDER BY name ASC
+		SELECT _id, name FROM types ORDER BY name COLLATE NOCASE ASC
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from typess", err)
@@ -317,8 +317,8 @@ func UpdateType(id int64, name string) error {
 	return err
 }
 
-func DeleteType(name string) error {
-	stmt, err := db.Prepare(`DELETE FROM types WHERE name = ?`)
+func DeleteType(id int64) error {
+	stmt, err := db.Prepare(`DELETE FROM types WHERE _id = ?`)
 	if err != nil {
 		local.HandleErrorMessage("cant prepare to delete type", err)
 	}
@@ -327,14 +327,14 @@ func DeleteType(name string) error {
 			local.HandleErrorMessage("cant close prepare to delete type", err)
 		}
 	}()
-	_, err = stmt.Exec(name)
+	_, err = stmt.Exec(id)
 	return err
 }
 
 func ListLicences() []model.Licence {
 	list := make([]model.Licence, 0)
 	rows, err := db.Query(`
-		SELECT _id, name, link FROM licences ORDER BY name ASC
+		SELECT _id, name, link FROM licences ORDER BY name COLLATE NOCASE ASC
 	`)
 	if err != nil {
 		local.HandleErrorMessage("cant read rows from licences", err)
@@ -390,8 +390,8 @@ func UpdateLicence(id int64, name string, link string) error {
 	return err
 }
 
-func DeleteLicence(name string) error {
-	stmt, err := db.Prepare(`DELETE FROM licences WHERE name = ?`)
+func DeleteLicence(id int64) error {
+	stmt, err := db.Prepare(`DELETE FROM licences WHERE _id = ?`)
 	if err != nil {
 		local.HandleErrorMessage("cant prepare to delete licence", err)
 	}
@@ -400,7 +400,7 @@ func DeleteLicence(name string) error {
 			local.HandleErrorMessage("cant close prepare to delete licences", err)
 		}
 	}()
-	_, err = stmt.Exec(name)
+	_, err = stmt.Exec(id)
 	return err
 }
 
@@ -411,4 +411,24 @@ func mountQuery(q string) string {
 	tokens := strings.Fields(q)
 	joined := "%" + strings.Join(tokens, "%") + "%"
 	return fmt.Sprintf("WHERE c.name LIKE '%s' OR c.author LIKE '%s'", joined, joined)
+}
+
+func CountAssociatedCredits(table string, id int64) int64 {
+	column := table + "_id"
+	rows, err := db.Query(fmt.Sprintf(`SELECT COUNT(_id) AS total FROM credits WHERE %s = %d`, column, id))
+	if err != nil {
+		local.HandleErrorMessage("cant read rows from count credits", err)
+	}
+	defer func() {
+		if err := rows.Close(); err != nil {
+			local.HandleErrorMessage("cant close rows from count credits", err)
+		}
+	}()
+	var total int64
+	for rows.Next() {
+		if err := rows.Scan(&total); err != nil {
+			local.HandleErrorMessage("cant read row from count credits", err)
+		}
+	}
+	return total
 }

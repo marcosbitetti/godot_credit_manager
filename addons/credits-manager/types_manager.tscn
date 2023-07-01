@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://dappb55k08tx6"]
+
+[ext_resource type="Script" path="res://addons/credits-manager/types_manager.gd" id="1_j8hfl"]
+
+[node name="types_manager" type="Window"]
+title = "Types Manager"
+position = Vector2i(0, 36)
+size = Vector2i(550, 400)
+script = ExtResource("1_j8hfl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 550.0
+offset_bottom = 400.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "click to edit"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="list" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="edit" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/edit"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/edit/HBoxContainer"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+text = "Name"
+
+[node name="name" type="LineEdit" parent="VBoxContainer/edit/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/edit"]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/edit/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="VBoxContainer/edit/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/edit/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="Button_del" type="Button" parent="VBoxContainer/edit/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+text = "Delete"
+
+[node name="Button" type="Button" parent="VBoxContainer/edit/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+text = "Create New"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="VBoxContainer/edit/HBoxContainer3/HBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/edit/HBoxContainer3/HBoxContainer2/Button_del" to="." method="_on_button_del_pressed"]
+[connection signal="pressed" from="VBoxContainer/edit/HBoxContainer3/HBoxContainer2/Button" to="." method="_on_button_pressed"]

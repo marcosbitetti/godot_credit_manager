@@ -16,10 +16,12 @@ var commandList map[string]func(query string) string = map[string]func(query str
 	"licences":       commands.ListLicences,
 	"add-licence":    commands.AddOrUpdateLicence,
 	"update-licence": commands.AddOrUpdateLicence,
+	"delete-licence": commands.DeleteLicence,
 
 	"types":       commands.ListTypes,
 	"add-type":    commands.AddOrUpdateType,
 	"update-type": commands.AddOrUpdateType,
+	"delete-type": commands.DeleteType,
 }
 
 func Start(com []string) {

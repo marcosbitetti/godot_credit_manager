@@ -7,15 +7,23 @@ import (
 	"testing"
 )
 
-func TestList(t *testing.T) {
+func TestListCredits(t *testing.T) {
 	t.Run("return empty list", func(t *testing.T) {
 		app.Start([]string{"_executable", "list", "asc"})
 	})
 }
 
-func TestFilteredListByNameOrAuthor(t *testing.T) {
+func TestFilteredListCreditsByNameOrAuthor(t *testing.T) {
 	t.Run("return empty list", func(t *testing.T) {
 		app.Start([]string{"_executable", "list", "asc", "wood"})
+	})
+}
+
+func TestDeleteCredit(t *testing.T) {
+	t.Run("return empty list", func(t *testing.T) {
+		app.Start([]string{"_executable", "list", "asc"})
+		app.Start([]string{"_executable", "delete", "19"})
+		app.Start([]string{"_executable", "list", "asc"})
 	})
 }
 
@@ -35,6 +43,20 @@ func TestAddLicence(t *testing.T) {
 func TestUpdateLicence(t *testing.T) {
 	t.Run("return empty list", func(t *testing.T) {
 		app.Start([]string{"_executable", "update-licence", `{"_id":19,"name":"_teste_changed", "link":"http://test.tst"}`})
+		app.Start([]string{"_executable", "licences", "asc"})
+	})
+}
+
+func TestDeleteLicenceSoft(t *testing.T) {
+	t.Run("return empty list", func(t *testing.T) {
+		app.Start([]string{"_executable", "delete-licence", "1"})
+		app.Start([]string{"_executable", "licences", "asc"})
+	})
+}
+
+func TestDeleteLicenceHard(t *testing.T) {
+	t.Run("return empty list", func(t *testing.T) {
+		app.Start([]string{"_executable", "delete-licence", "19"})
 		app.Start([]string{"_executable", "licences", "asc"})
 	})
 }
@@ -59,9 +81,16 @@ func TestUpdateType(t *testing.T) {
 	})
 }
 
-func TestDeleteType(t *testing.T) {
+func TestDeleteTypeSoft(t *testing.T) {
 	t.Run("return empty list", func(t *testing.T) {
-		//app.Start([]string{"_executable", "update-type", `{"_id":10,"name":"_teste_changed"}`})
+		app.Start([]string{"_executable", "delete-type", "6"})
+		app.Start([]string{"_executable", "types", "asc"})
+	})
+}
+
+func TestDeleteTypeHard(t *testing.T) {
+	t.Run("return empty list", func(t *testing.T) {
+		app.Start([]string{"_executable", "delete-type", "10"})
 		app.Start([]string{"_executable", "types", "asc"})
 	})
 }
