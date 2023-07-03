@@ -23,11 +23,17 @@ static func format_bb_code(credit : Dictionary) -> String:
 
 static func map_resources() -> Array:
 	var local = files_resources()
-	var list = []
+	var list_base = []
 	for c in get_from_api(["list", "asc"]):
 		if local.find(c.filename) > -1:
-			list.append(c)
-	return list
+			list_base.append(c)
+	
+	var list_final = []
+	for session_obj in get_from_api(["types","asc"]):
+		for item in list_base:
+			if item.type == session_obj.name:
+				list_final.append(item)
+	return list_final
 
 static func files_resources(path : String = "", list : Array = []) -> Array:
 	path = "res://" if "" == path else path

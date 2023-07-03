@@ -1,26 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6hwhlc18qoys"]
 
-[ext_resource type="Script" path="res://test/credits.gd" id="1_npfcf"]
+[ext_resource type="Script" path="res://test/credits.gd" id="1_lbeed"]
 
 [node name="credits" type="VBoxContainer"]
 custom_minimum_size = Vector2(800, 200)
-script = ExtResource("1_npfcf")
-
-[node name="lbl_Project" type="Label" parent="."]
-layout_mode = 2
-text = "Project"
-
-[node name="Project" type="RichTextLabel" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "[b][url=http://www.wildwitchproject.com.br/]Wild Witch Project[/url][/b] by Marcos Augusto Bitetti (marcosbitetti@gmail.com),  licensed under [b][url=https://creativecommons.org/licenses/by-nd/4.0/]Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)[/url][/b]
-
-"
-fit_content = true
-scroll_active = false
-shortcut_keys_enabled = false
+script = ExtResource("1_lbeed")
 
 [node name="lbl_3D Model" type="Label" parent="."]
 layout_mode = 2
@@ -31,7 +15,53 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "[b][url=https://github.com/GDQuest/godot-3d-mannequin]Open 3D Mannequin[/url][/b] by GDQuest,  licensed under [b][url=https://opensource.org/license/mit/]MIT[/url][/b]
+text = "[b][url=https://sketchfab.com/3d-models/altar-ruins-189d92da96e147e0924c0c0dc5e17d3f]Altar Ruins[/url][/b] by [b]ion_omat[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Attribution 4.0 International (CC BY 4.0)[/url][/b]
+
+[b][url=https://www.blendswap.com/blend/27627]Ghibli Tree and Clouds[/url][/b] by [b]bimoded60[/b],  licensed under [b][url=https://creativecommons.org/licenses/by-nc/4.0/]Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)[/url][/b]
+
+[b][url=https://sketchfab.com/3d-models/mushrooms-f9dbd4c34a4f4389bf3901527ecc89a0]Mushrooms from Sketchfab[/url][/b] by [b]leha_pu[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Attribution 4.0 International (CC BY 4.0)[/url][/b]
+
+[b][url=https://github.com/GDQuest/godot-3d-mannequin]Open 3D Mannequin[/url][/b] by [b]GDQuest[/b],  licensed under [b][url=https://opensource.org/license/mit/]MIT[/url][/b]
+
+[b][url=https://sketchfab.com/3d-models/roman-ruins-in-medieval-london-76329ebc18f44fbbbe8f35b9bdf3ac4d]Roman Ruins in Medieval London[/url][/b] by [b]Andy Woodhead[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Attribution 4.0 International (CC BY 4.0)[/url][/b]
+
+[b][url=https://sketchfab.com/3d-models/temple-154c22f7bdd2409ab5c631f48107e0f8]Temple[/url][/b] by [b]Arnau Rocher Alcayde[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Attribution 4.0 International (CC BY 4.0)[/url][/b]
+
+[b][url=https://quaternius.com/packs/ultimatenature.html]Ultimate Nature Pack[/url][/b] by [b]quaternius[/b],  licensed under [b][url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication[/url][/b]
+
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="lbl_Shader" type="Label" parent="."]
+layout_mode = 2
+text = "Shader"
+
+[node name="Shader" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b][url=https://github.com/eldskald/godot4-cel-shader]godot4-cel-shader[/url][/b] by [b]eldskald[/b],  licensed under [b][url=https://opensource.org/license/mit/]MIT[/url][/b]
+
+"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="lbl_Texture" type="Label" parent="."]
+layout_mode = 2
+text = "Texture"
+
+[node name="Texture" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[b][url=https://www.pxfuel.com/en/free-photo-ovbrn]white marble cracked[/url][/b] by [b]unknow[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Free for comercial use[/url][/b]
+
+[b][url=https://www.pxfuel.com/en/free-photo-ovbrn]white marble cracked[/url][/b] by [b]unknow[/b],  licensed under [b][url=https://creativecommons.org/licenses/by/4.0/]Free for comercial use[/url][/b]
 
 "
 fit_content = true
