@@ -21,3 +21,7 @@ type Credit struct {
 	Licence    string `json:"licence"`
 	LicenceUrl string `json:"licenceUrl"`
 }
+
+type Query struct {
+	Text string `json:"text"`
+}

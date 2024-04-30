@@ -4,6 +4,8 @@ extends Window
 signal update_data()
 
 const Helpers = preload("res://addons/credits-manager/helpers.gd")
+const LicenceManager : PackedScene = preload("res://addons/credits-manager/licence_manager.tscn")
+const TypesManager : PackedScene = preload("res://addons/credits-manager/types_manager.tscn")
 
 var data : Dictionary
 var types : Array[Dictionary] = []
@@ -81,9 +83,13 @@ func _on_pick_pressed():
 	fd.file_mode = EditorFileDialog.FILE_MODE_OPEN_ANY
 	fd.connect("file_selected", file_selected)
 	fd.connect("dir_selected", file_selected)
-	fd.size = Vector2(600,400)
+	fd.size = Vector2(800,650)
 	get_tree().root.add_child(fd)
 	fd.popup_centered()
+	var size = DisplayServer.screen_get_size() / 2
+	size -= Vector2i(400, 325)
+	fd.position = Vector2(size)
+	
 
 func file_selected(path : String):
 	var name = path.get_file()
@@ -92,3 +98,17 @@ func file_selected(path : String):
 	data.filename = name
 	$Panel/a/file/LineEdit.text = data.filename
 
+
+# add type
+func _on_button_pressed():
+	var tm = TypesManager.instantiate()
+	get_tree().root.add_child(tm)
+	tm.hide()
+	tm.popup_centered(tm.size)
+
+# add licence
+func _on_button_2_pressed():
+	var lm = LicenceManager.instantiate()
+	get_tree().root.add_child(lm)
+	lm.hide()
+	lm.popup_centered(lm.size)

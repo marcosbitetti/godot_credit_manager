@@ -38,5 +38,10 @@ executable *list* *asc*/*desc* [*search string*]
 ./credits-manager types asc/desc
 ```
 
+# auto-complete for author list
+``` bash
+./credits-manager auto-complete-author [characters here]
+```
+
 
 

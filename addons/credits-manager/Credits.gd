@@ -31,7 +31,8 @@ func _ready():
 func _on_add_pressed():
 	var c = CreditEdit.instantiate()
 	get_tree().root.add_child(c)
-	c.popup_centered(c.size)
+	c.hide()
+	c.popup_centered()
 	c.setup({"_id":0,"author":"","filename":"","licence":"","licenceUrl":"","link":"","name":"","type":""})
 	c.connect("update_data", create_data)
 
@@ -46,6 +47,7 @@ func _on_export_json_pressed():
 func _on_export_tscene_pressed():
 	var c = CreditGenerator.instantiate()
 	get_tree().root.add_child(c)
+	c.hide()
 	c.popup_centered(c.size)
 
 
@@ -62,10 +64,12 @@ func _on_search_text_text_changed(new_text):
 func _on_manage_licences_pressed():
 	var lm = LicenceManager.instantiate()
 	get_tree().root.add_child(lm)
+	lm.hide()
 	lm.popup_centered(lm.size)
 
 
 func _on_manage_types_pressed():
 	var tm = TypesManager.instantiate()
 	get_tree().root.add_child(tm)
+	tm.hide()
 	tm.popup_centered(tm.size)

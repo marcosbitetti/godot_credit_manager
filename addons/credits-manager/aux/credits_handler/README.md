@@ -19,6 +19,9 @@ Nothing is requerid, even you try to change this tool
 ## Compilation
 * type `make`
 
+## Tests
+* type `go test -v ./_tests/.`
+
 If you need a different environment (such i386) remove comments on `Makefile`
 
 ## License

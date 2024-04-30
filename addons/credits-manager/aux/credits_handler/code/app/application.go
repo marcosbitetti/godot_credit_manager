@@ -22,6 +22,8 @@ var commandList map[string]func(query string) string = map[string]func(query str
 	"add-type":    commands.AddOrUpdateType,
 	"update-type": commands.AddOrUpdateType,
 	"delete-type": commands.DeleteType,
+
+	"auto-complete-author": commands.AutoCompleteAuthor,
 }
 
 func Start(com []string) {
@@ -44,8 +46,8 @@ func Start(com []string) {
 
 	out := callable(strings.Join(commandStr, " "))
 	if out == "" {
-		print(`{"error":"error"}`)
+		Print(`{"error":"error"}`)
 		return
 	}
-	print(out)
+	Print(out)
 }

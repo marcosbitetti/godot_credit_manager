@@ -6,28 +6,54 @@ import (
 	"credits_manager/model"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
+const AtribuitionModelPath = "ATRIBUITION_HANDLER_PATH"
+
 var db *sql.DB
 
 func getExecPath() string {
-	ex, err := os.Executable()
+	ex, err := os.Getwd() //os.Executable()
 	if err != nil {
 		local.HandleErrorMessage("cant get executable path", err)
 	}
-	return filepath.Dir(ex)
+	return ex //filepath.Dir(ex)
 }
 
 func getDatabasePath() string {
 	path := fmt.Sprintf("%s/../source-database.json", getExecPath())
-	bytes, err := ioutil.ReadFile(path)
+	// check 1st path
+	_, err := os.Stat(path)
+	if err != nil {
+		if !os.IsNotExist(err) {
+			panic(" path " + getExecPath() + " : " + err.Error())
+		}
+		// check 2sd path
+		path = fmt.Sprintf("%s/source-database.json", getExecPath())
+		_, err = os.Stat(path)
+		if err != nil {
+			if !os.IsNotExist(err) {
+				panic("path " + getExecPath() + " : " + err.Error())
+			}
+			path = os.Getenv(AtribuitionModelPath)
+			if path == "" {
+				panic("path cant be reachable")
+			}
+			path = fmt.Sprintf("%s/source-database.json", path)
+			_, err = os.Stat(path)
+			if err != nil {
+				panic("path cant be reachable: " + err.Error())
+			}
+		}
+	}
+
+	bytes, err := os.ReadFile(path)
 	if err != nil {
 		local.HandleErrorMessage("cant load data from source-database.json file", err)
 	}
@@ -146,6 +172,7 @@ func dumpFirstTypes() {
 	AddType("Shader")
 	AddType("Photo")
 	AddType("Dubbing/Narration")
+	AddType("Font")
 }
 
 func dumpFirstLicences() {
@@ -166,6 +193,9 @@ func dumpFirstLicences() {
 	AddLicence("GNU Lesser General Public License (LGPL)", "https://www.gnu.org/licenses/lgpl-3.0.html")
 	AddLicence("Apache License 2.0", "https://www.apache.org/licenses/LICENSE-2.0")
 	AddLicence("Mozilla Public License 2.0", "https://www.mozilla.org/en-US/MPL/2.0/")
+	AddLicence("Beerware", "https://fedoraproject.org/wiki/Licensing/Beerware")
+	AddLicence("Royalty Free", "https://en.wikipedia.org/wiki/Royalty-free")
+	AddLicence("Open Font License (OFL)", "https://openfontlicense.org/")
 }
 
 func ListCredits(ascDesc string, search string) []model.Credit {
@@ -431,4 +461,49 @@ func CountAssociatedCredits(table string, id int64) int64 {
 		}
 	}
 	return total
+}
+
+func ListField(search string, field string) []string {
+	list := make([]string, 0)
+	search = search + "%"
+	stmt, err := db.Prepare(fmt.Sprintf(`SELECT %s FROM credits WHERE %s LIKE ?`, field, field))
+	if err != nil {
+		local.HandleErrorMessage("cant prepare to list field", err)
+	}
+	defer func() {
+		if err := stmt.Close(); err != nil {
+			local.HandleErrorMessage("cant close prepare list field", err)
+		}
+	}()
+	rows, err := stmt.Query(search)
+	if err != nil {
+		local.HandleErrorMessage("cant read rows from list fields", err)
+	}
+	defer func() {
+		if err := rows.Close(); err != nil {
+			local.HandleErrorMessage("cant close rows from list fields", err)
+		}
+	}()
+	for rows.Next() {
+		data := ""
+		if err := rows.Scan(&data); err != nil {
+			local.HandleErrorMessage("cant read row from list fields", err)
+		}
+		list = append(list, data)
+	}
+	return list
+}
+
+func CreateEmptyDatabase(path string) (*sql.DB, error) {
+	var err error
+	db, err = sql.Open("sqlite3", path)
+	if err != nil {
+		return nil, errors.Join(err, errors.New("cant open/create file"))
+	}
+	if err := createBaseTable(context.Background()); err != nil {
+		return nil, errors.Join(err, errors.New("cant create table"))
+	}
+	dumpFirstTypes()
+	dumpFirstLicences()
+	return db, nil
 }

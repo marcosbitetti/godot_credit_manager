@@ -177,5 +177,7 @@ size_flags_horizontal = 3
 [connection signal="text_changed" from="Panel/a/author/LineEdit" to="." method="_on_author_text_changed"]
 [connection signal="about_to_popup" from="Panel/a/type/MenuButton" to="." method="_on_type_about_to_popup"]
 [connection signal="about_to_popup" from="Panel/a/licence/MenuButton" to="." method="_on_licence_about_to_popup"]
+[connection signal="pressed" from="Panel/a/other/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/a/other/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Panel/a/events/Button" to="." method="_on_close_requested"]
 [connection signal="pressed" from="Panel/a/events/Button2" to="." method="_on_button_save_pressed"]

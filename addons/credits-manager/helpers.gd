@@ -2,9 +2,11 @@ extends Object
 
 
 static func get_from_api(args : Array[String]) -> Array:
-	var path : String = ProjectSettings.globalize_path("res://")
-	path += "addons/credits-manager/aux/credits_handler/bin/" + check_os()
+	var path_base : String = ProjectSettings.globalize_path("res://")
+	var path = path_base + "addons/credits-manager/aux/credits_handler/bin/" + check_os()
+	var path_handler = path_base + "addons/credits-manager/aux/credits_handler"
 	var out : Array[String] = []
+	OS.set_environment('ATRIBUITION_HANDLER_PATH', ProjectSettings.globalize_path(path_handler))
 	var code : int = OS.execute(path, args, out, true )
 	if code != 0:
 		print_debug("error: " + str(code))
