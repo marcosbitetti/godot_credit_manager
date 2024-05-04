@@ -13,3 +13,6 @@ cross_compile:
 	upx -9 ../bin/credits-manager-amd64-darwin
 	
 
+test:
+	go test -v ./_tests/.
+

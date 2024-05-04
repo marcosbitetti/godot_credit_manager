@@ -173,6 +173,7 @@ func dumpFirstTypes() {
 	AddType("Photo")
 	AddType("Dubbing/Narration")
 	AddType("Font")
+	AddType("Code Snippet")
 }
 
 func dumpFirstLicences() {
@@ -196,6 +197,7 @@ func dumpFirstLicences() {
 	AddLicence("Beerware", "https://fedoraproject.org/wiki/Licensing/Beerware")
 	AddLicence("Royalty Free", "https://en.wikipedia.org/wiki/Royalty-free")
 	AddLicence("Open Font License (OFL)", "https://openfontlicense.org/")
+	AddLicence("OGA-BY 3.0", "https://static.opengameart.org/OGA-BY-3.0.txt")
 }
 
 func ListCredits(ascDesc string, search string) []model.Credit {

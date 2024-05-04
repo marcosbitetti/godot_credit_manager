@@ -20,7 +20,8 @@ Nothing is requerid, even you try to change this tool
 * type `make`
 
 ## Tests
-* type `go test -v ./_tests/.`
+* type `go test -v ./_tests/.` or `make test`
+
 
 If you need a different environment (such i386) remove comments on `Makefile`
 
