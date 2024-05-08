@@ -197,7 +197,8 @@ func dumpFirstLicences() {
 	AddLicence("Beerware", "https://fedoraproject.org/wiki/Licensing/Beerware")
 	AddLicence("Royalty Free", "https://en.wikipedia.org/wiki/Royalty-free")
 	AddLicence("Open Font License (OFL)", "https://openfontlicense.org/")
-	AddLicence("OGA-BY 3.0", "https://static.opengameart.org/OGA-BY-3.0.txt")
+	AddLicence("OGA-BY 3.0 (Open Game Art)", "https://static.opengameart.org/OGA-BY-3.0.txt")
+	AddLicence("Free Standard (Sketchfab)", "https://www.youtube.com/watch?v=M2bKt1oZsi4")
 }
 
 func ListCredits(ascDesc string, search string) []model.Credit {

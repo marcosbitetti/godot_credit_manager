@@ -24,6 +24,8 @@ var commandList map[string]func(query string) string = map[string]func(query str
 	"delete-type": commands.DeleteType,
 
 	"auto-complete-author": commands.AutoCompleteAuthor,
+
+	"csv": commands.ExportCSV,
 }
 
 func Start(com []string) {

@@ -245,6 +245,35 @@ func TestAutoCompleteAuthor(t *testing.T) {
 	})
 }
 
+var expectedCSV = `work,author,link,licence,description
+thing 1,jose,https://link,Attribution 4.0 International (CC BY 4.0),3D Model
+thing 2,jose,https://link,Attribution 4.0 International (CC BY 4.0),3D Model
+thing 3,jack,https://link,Attribution 4.0 International (CC BY 4.0),3D Model
+`
+
+func TestExportCSV(t *testing.T) {
+	prepareTest(t)
+	db := prepareDatabase(t)
+	dumpRegisters(t, db)
+	t.Run("return jose list", func(t *testing.T) {
+		app.Start([]string{getExecPath(), "csv", `{
+			"path" : "/tmp/",
+			"attribuitions" : true,
+			"licences" : true
+		}`})
+	})
+	if freePrint() != "saved" {
+		t.Error("cant write csv")
+	}
+	file, err := os.ReadFile("/tmp/works.csv")
+	if err != nil {
+		t.Error(err.Error())
+	}
+	if string(file) != expectedCSV {
+		t.Error(err.Error())
+	}
+}
+
 // ********
 
 var output bytes.Buffer

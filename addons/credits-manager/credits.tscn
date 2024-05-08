@@ -66,23 +66,32 @@ alignment = 2
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Export:"
 
-[node name="Button" type="Button" parent="HBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Create:"
+
+[node name="Button" type="Button" parent="HBoxContainer/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "TSCN"
 
-[node name="Button2" type="Button" parent="HBoxContainer/HBoxContainer"]
-visible = false
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "JSON"
+
+[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Export:"
+
+[node name="Button2" type="Button" parent="HBoxContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "CSV"
 
 [connection signal="text_changed" from="HBoxContainerFilter/HBoxContainer/search_text" to="." method="_on_search_text_text_changed"]
 [connection signal="pressed" from="HBoxContainerFilter/HBoxContainer/clear_search" to="." method="_on_clear_search_pressed"]
 [connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="HBoxContainer/manage_licences" to="." method="_on_manage_licences_pressed"]
 [connection signal="pressed" from="HBoxContainer/manage_types" to="." method="_on_manage_types_pressed"]
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/Button" to="." method="_on_export_tscene_pressed"]
-[connection signal="pressed" from="HBoxContainer/HBoxContainer/Button2" to="." method="_on_export_json_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/HBoxContainer/Button" to="." method="_on_export_tscene_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/HBoxContainer2/Button2" to="." method="_on_csv_pressed"]

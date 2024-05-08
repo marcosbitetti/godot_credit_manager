@@ -73,3 +73,19 @@ func _on_manage_types_pressed():
 	get_tree().root.add_child(tm)
 	tm.hide()
 	tm.popup_centered(tm.size)
+
+
+func _on_csv_pressed():
+	var d = EditorFileDialog.new()
+	d.access = EditorFileDialog.ACCESS_FILESYSTEM
+	d.file_mode = EditorFileDialog.FILE_MODE_OPEN_DIR
+	d.connect("dir_selected", save_csv)
+	add_child(d)
+	d.popup_centered(Vector2(500,400))
+
+func save_csv(path : String):
+	print(JSON.stringify({"path" = path}).replace("\"", "\\\""))
+	var res = Helpers.get_from_api(['csv', JSON.stringify({"path" = path}).replace("\"", "\\\"")])
+	
+	
+
