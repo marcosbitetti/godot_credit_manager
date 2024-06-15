@@ -16,6 +16,8 @@ static func get_from_api(args : Array[String]) -> Array:
 		print_debug("error on call binary")
 		return []
 	var list = JSON.parse_string(out[0])
+	if not list is Array:
+		list = [list]
 	return Array(list)
 
 static func format_bb_code(credit : Dictionary) -> String:

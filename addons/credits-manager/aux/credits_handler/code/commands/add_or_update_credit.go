@@ -13,11 +13,18 @@ func AddOrUpdate(query string) string {
 		local.HandleErrorMessage("Cant unmarshal list", err)
 	}
 
+	var response string
+	var err error
 	if data.Id == 0 {
-		infra.AddCredit(data.Name, data.FileName, data.Author, data.Link, data.Type, data.Licence)
+		response = "added"
+		err = infra.AddCredit(data.Name, data.FileName, data.Author, data.Link, data.Type, data.Licence)
 	} else {
-		infra.UpdateCredit(data.Id, data.Name, data.FileName, data.Author, data.Link, data.Type, data.Licence)
+		response = "updated"
+		err = infra.UpdateCredit(data.Id, data.Name, data.FileName, data.Author, data.Link, data.Type, data.Licence)
+	}
+	if err != nil {
+		response = "error: " + err.Error()
 	}
 
-	return "[]"
+	return `{"status":"` + response + `"}`
 }

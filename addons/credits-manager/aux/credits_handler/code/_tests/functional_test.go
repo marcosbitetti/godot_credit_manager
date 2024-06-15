@@ -21,7 +21,56 @@ func TestListCreditsForFirstTime(t *testing.T) {
 		app.Start([]string{getExecPath(), "list", "asc"})
 		result := freePrint()
 		if result != "[]" {
-			t.Error(fmt.Sprintf("wrong empty result: %s", result))
+			t.Errorf("wrong empty result: %s", result)
+		}
+	})
+}
+
+func TestAddCredit(t *testing.T) {
+	prepareTest(t)
+	prepareDatabase(t)
+	t.Run("return list with new record", func(t *testing.T) {
+		app.Start([]string{getExecPath(), "add",
+			`{"name":"Work","filename":"res://file","author":"Joe","link":"http://...","type":"Music","licence":"MIT"}`,
+		})
+		result := freePrint()
+		if result != `{"status":"added"}` {
+			t.Errorf("wrong result: %s", result)
+		}
+		app.Start([]string{getExecPath(), "list", "asc"})
+		result = freePrint()
+		if result != `[{"_id":1,"name":"Work","filename":"res://file","type":"Music","author":"Joe","link":"http://...","licence":"MIT","licenceUrl":"https://opensource.org/license/mit/"}]` {
+			t.Errorf("wrong result: %s", result)
+		}
+	})
+}
+
+func TestIfFileReferenceAlreadyExists(t *testing.T) {
+	prepareTest(t)
+	prepareDatabase(t)
+	firstStep := func() {
+		app.Start([]string{getExecPath(), "add",
+			`{"name":"Work","filename":"file_test","author":"Joe","link":"http://...","type":"Music","licence":"MIT"}`,
+		})
+		result := freePrint()
+		if result != `{"status":"added"}` {
+			t.Errorf("wrong result: %s", result)
+		}
+	}
+	t.Run("return true if file already credited", func(t *testing.T) {
+		firstStep()
+		app.Start([]string{getExecPath(), "file-exists", "file_test"})
+		result := freePrint()
+		if result != `{"exists":true}` {
+			t.Errorf("wrong result: %s", result)
+		}
+	})
+	t.Run("return false if file not credited", func(t *testing.T) {
+		firstStep()
+		app.Start([]string{getExecPath(), "file-exists", "file_new_file"})
+		result := freePrint()
+		if result != `{"exists":false}` {
+			t.Errorf("wrong result: %s", result)
 		}
 	})
 }
@@ -111,7 +160,7 @@ func TestUpdateLicence(t *testing.T) {
 		app.Start([]string{getExecPath(), "update-licence", `{"_id":1,"name":"_teste_changed", "link":"http://test.tst"}`})
 		freePrint()
 		app.Start([]string{getExecPath(), "licences", "asc"})
-		if strings.Index(freePrint(), "_teste_changed") < 0 {
+		if !strings.Contains(freePrint(), "_teste_changed") {
 			t.Error("cant update licence")
 		}
 	})
@@ -187,7 +236,7 @@ func TestUpdateType(t *testing.T) {
 		app.Start([]string{getExecPath(), "update-type", `{"_id":1,"name":"_teste_changed"}`})
 		freePrint()
 		app.Start([]string{getExecPath(), "types", "asc"})
-		if strings.Index(freePrint(), "_teste_changed") < 0 {
+		if !strings.Contains(freePrint(), "_teste_changed") {
 			t.Error("cant update type")
 		}
 	})

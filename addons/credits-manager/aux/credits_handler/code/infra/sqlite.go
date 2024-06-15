@@ -497,6 +497,37 @@ func ListField(search string, field string) []string {
 	return list
 }
 
+func FileExists(filename string) bool {
+	stmt, err := db.Prepare(`SELECT _id FROM credits WHERE filename = ?`)
+	if err != nil {
+		local.HandleErrorMessage("cant prepare to file exist", err)
+	}
+	defer func() {
+		if err := stmt.Close(); err != nil {
+			local.HandleErrorMessage("cant close prepare file exist", err)
+		}
+	}()
+	rows, err := stmt.Query(filename)
+	if err != nil {
+		local.HandleErrorMessage("cant read rows from file exist", err)
+	}
+	defer func() {
+		if err := rows.Close(); err != nil {
+			local.HandleErrorMessage("cant close rows from file exist", err)
+		}
+	}()
+	for rows.Next() {
+		id := 0
+		if err := rows.Scan(&id); err != nil {
+			local.HandleErrorMessage("cant read row from file exist", err)
+		}
+		if id != 0 {
+			return true
+		}
+	}
+	return false
+}
+
 func CreateEmptyDatabase(path string) (*sql.DB, error) {
 	var err error
 	db, err = sql.Open("sqlite3", path)

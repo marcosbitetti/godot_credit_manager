@@ -59,9 +59,20 @@ custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 text = "File"
 
-[node name="LineEdit" type="LineEdit" parent="Panel/a/file"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/a/file"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Panel/a/file/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="file_already_exists" type="Label" parent="Panel/a/file/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988235, 0.443137, 0.482353, 1)
+theme_override_font_sizes/font_size = 13
+text = "Attention: this file alread exists"
 
 [node name="Button" type="Button" parent="Panel/a/file"]
 layout_mode = 2
@@ -172,7 +183,7 @@ size_flags_horizontal = 3
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="text_changed" from="Panel/a/name/LineEdit" to="." method="_on_name_text_changed"]
 [connection signal="text_changed" from="Panel/a/link/LineEdit" to="." method="_on_link_text_changed"]
-[connection signal="text_changed" from="Panel/a/file/LineEdit" to="." method="_on_file_text_changed"]
+[connection signal="text_changed" from="Panel/a/file/VBoxContainer/LineEdit" to="." method="_on_file_text_changed"]
 [connection signal="pressed" from="Panel/a/file/Button" to="." method="_on_pick_pressed"]
 [connection signal="text_changed" from="Panel/a/author/LineEdit" to="." method="_on_author_text_changed"]
 [connection signal="about_to_popup" from="Panel/a/type/MenuButton" to="." method="_on_type_about_to_popup"]

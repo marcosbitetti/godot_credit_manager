@@ -24,6 +24,7 @@ var commandList map[string]func(query string) string = map[string]func(query str
 	"delete-type": commands.DeleteType,
 
 	"auto-complete-author": commands.AutoCompleteAuthor,
+	"file-exists":          commands.FileExists,
 
 	"csv": commands.ExportCSV,
 }

@@ -96,7 +96,15 @@ func file_selected(path : String):
 	if name=="":
 		name = path.get_slice("/", path.get_slice_count("/") - 1)
 	data.filename = name
-	$Panel/a/file/LineEdit.text = data.filename
+	$Panel/a/file/VBoxContainer/LineEdit.text = data.filename
+	# verify
+	$Panel/a/file/VBoxContainer/file_already_exists.hide()
+	var exists : Dictionary = Helpers.get_from_api(["file-exists", name])[0]
+	if exists.has('error'):
+		OS.alert(exists.error, 'Error')
+		return
+	if exists.exists == true:
+		$Panel/a/file/VBoxContainer/file_already_exists.show()
 
 
 # add type

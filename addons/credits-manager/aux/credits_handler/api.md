@@ -15,12 +15,17 @@ executable *list* *asc*/*desc* [*search string*]
 # edit credit
 * add credit
 ``` bash
-./credits-manager add {"name":"Work", "filename":"res://file", "author":"Joe", "link":"http://...", "type_id":1, "licence_id":1}
+./credits-manager add {"name":"Work", "filename":"res://file", "author":"Joe", "link":"http://...", "type":"Music", "licence":"MIT"}
 ```
 
 * update credit
 ``` bash
-./credits-manager update {_id:1, "name":"Work", "filename":"res://file", "author":"Joe", "link":"http://...", "type_id":1, "licence_id":1}
+./credits-manager update {_id:1, "name":"Work", "filename":"res://file", "author":"Joe", "link":"http://...", "type":"Music", "licence":"MIT"}
+```
+
+* check credit is already designet to a file
+``` bash
+./credits-manager file-exists res://file
 ```
 
 # delete credit
